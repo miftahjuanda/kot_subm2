@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Github User\'s</string>
+    <string name="name">Name</string>
+    <string name="location">Location</string>
+    <string name="company">Company</string>
+    <string name="username">Username</string>
+    <string name="text">24</string>
+    <string name="detailUser">Detail User</string>
+    <string name="miftah">Miftah Juanda Batubara</string>
+    <string name="todo">TODO</string>
+    <string name="search">Search</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
+    <string name="search_hint">Cari User Github</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="type">User</string>
+</resources>
