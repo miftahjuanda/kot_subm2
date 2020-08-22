@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kelaspemula.submission1.Activity.DetailAcivity
+import com.kelaspemula.submission1.BuildConfig
 import com.kelaspemula.submission1.Fragment.FollowerFragment
 import com.kelaspemula.submission1.Model.User
 import com.loopj.android.http.AsyncHttpClient
@@ -17,13 +18,19 @@ import org.json.JSONObject
 import java.lang.Exception
 
 class MainViewModel : ViewModel() {
+    companion object {
+        const val AUTH = "Authorization"
+        const val AGENT = "User-Agent"
+        const val REQ = "request"
+    }
+
     val listUsers = MutableLiveData<ArrayList<User>>()
 
     fun homeData() {
         val client = AsyncHttpClient()
         val url = " https://api.github.com/search/users?q=a"
-        client.addHeader("Authorization", "token a55286e4a0babdcb7d28e1bcb121da749828b374")
-        client.addHeader("User-Agent", "request")
+        client.addHeader(AUTH, BuildConfig.ApiKey)
+        client.addHeader(AGENT, REQ)
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
                 statusCode: Int,
@@ -57,7 +64,6 @@ class MainViewModel : ViewModel() {
                 responseBody: ByteArray,
                 error: Throwable
             ) {
-                Log.d("onFailur", error.message.toString())
             }
         })
     }
@@ -65,8 +71,8 @@ class MainViewModel : ViewModel() {
     fun setUser(username: String) {
         val client = AsyncHttpClient()
         val url = "https://api.github.com/search/users?q=$username"
-        client.addHeader("Authorization", "token a55286e4a0babdcb7d28e1bcb121da749828b374")
-        client.addHeader("User-Agent", "request")
+        client.addHeader(AUTH, BuildConfig.ApiKey)
+        client.addHeader(AGENT, REQ)
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
                 statusCode: Int,
@@ -79,7 +85,6 @@ class MainViewModel : ViewModel() {
                 try {
                     val responseObject = JSONObject(result)
                     val items = responseObject.getJSONArray("items")
-                    Log.d("itemss", items.toString())
 
                     for (i in 0 until items.length()) {
                         val item = items.getJSONObject(i)
@@ -91,7 +96,6 @@ class MainViewModel : ViewModel() {
                     }
                     listUsers.postValue(listUser)
                 } catch (e: Exception) {
-                    Log.d("Exception", e.message.toString())
                 }
             }
 
@@ -101,8 +105,6 @@ class MainViewModel : ViewModel() {
                 responseBody: ByteArray,
                 error: Throwable
             ) {
-                Log.d("onFailur", error.message.toString())
-
             }
         })
     }

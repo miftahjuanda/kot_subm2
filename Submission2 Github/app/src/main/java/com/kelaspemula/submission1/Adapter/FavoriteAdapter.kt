@@ -12,18 +12,20 @@ import com.kelaspemula.submission1.Model.User
 import com.kelaspemula.submission1.R
 import kotlinx.android.synthetic.main.item_list.view.*
 
-class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.UserViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    private val data = ArrayList<User>()
-
-    fun setData(item: ArrayList<User>) {
-        data.clear()
-        data.addAll(item)
+    var mData = ArrayList<User>()
+    set(value) {
+        if (mData.size > 0 ) {
+            this.mData.clear()
+        }
+        this.mData.addAll(mData)
         notifyDataSetChanged()
+        field = value
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -31,10 +33,10 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
         return UserViewHolder(mView)
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = mData.size
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(mData[position])
     }
 
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

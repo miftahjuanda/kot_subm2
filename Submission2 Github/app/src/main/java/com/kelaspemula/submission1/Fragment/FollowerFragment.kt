@@ -63,7 +63,6 @@ class FollowerFragment : Fragment() {
                 val listUser = ArrayList<User>()
                 val result = String(responseBody)
                 pb_follower.visibility = View.INVISIBLE
-                Log.d("Result", result.toString())
 
                 try {
                     val items = JSONArray(result)
@@ -83,7 +82,6 @@ class FollowerFragment : Fragment() {
 
             override fun onFailure(statusCode: Int, headers: Array<out Header>, responseBody: ByteArray, error: Throwable) {
                 pb_follower.visibility = View.INVISIBLE
-                Log.d("onFailur", error.message.toString())
             }
         })
     }

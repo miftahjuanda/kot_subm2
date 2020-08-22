@@ -33,7 +33,6 @@ class FollowingFragment : Fragment() {
             fragment.arguments = bundle
             return fragment
         }
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -85,7 +84,6 @@ class FollowingFragment : Fragment() {
 
             override fun onFailure(statusCode: Int, headers: Array<out Header>, responseBody: ByteArray, error: Throwable) {
                 pb_following.visibility = View.INVISIBLE
-                Log.d(TAG, error.message.toString())
             }
         })
     }

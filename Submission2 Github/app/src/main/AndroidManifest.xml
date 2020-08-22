@@ -3,6 +3,15 @@
     package="com.kelaspemula.submission1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <permission
+        android:name="com.kelaspemula.submission1.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.kelaspemula.submission1.WRITE_DATABASE"
+        android:protectionLevel="normal" />
 
     <application
         android:allowBackup="true"
@@ -11,8 +20,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.DetailAcivity"/>
-        <activity android:name=".Activity.MainActivity"
+        <activity android:name=".alarm.AlarmActivity"/>
+        <activity android:name=".Activity.FavoriteActivity" />
+
+        <provider
+            android:name=".provider.FavoriteProvider"
+            android:authorities="com.kelaspemula.submission1"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="com.kelaspemula.submission1.READ_DATABASE"
+            android:writePermission="com.kelaspemula.submission1.WRITE_DATABASE" />
+
+        <receiver android:name=".alarm.AlarmSetting"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <activity android:name=".Activity.DetailAcivity" />
+        <activity
+            android:name=".Activity.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

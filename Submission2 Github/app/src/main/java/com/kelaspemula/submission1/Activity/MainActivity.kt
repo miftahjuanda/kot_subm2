@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -17,6 +18,7 @@ import com.kelaspemula.submission1.Adapter.UserAdapter
 import com.kelaspemula.submission1.R
 import com.kelaspemula.submission1.Model.User
 import com.kelaspemula.submission1.ViewModel.MainViewModel
+import com.kelaspemula.submission1.alarm.AlarmActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -65,7 +67,6 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String): Boolean {
 
                 mainViewModel.setUser(query)
-                Log.d("queryy", query.toString())
                 showLoading(true)
                 return true
             }
@@ -75,6 +76,22 @@ class MainActivity : AppCompatActivity() {
             }
         })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.favorite -> {
+                val intent = Intent(this, FavoriteActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.reminder -> {
+                val intent = Intent(this, AlarmActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun prepare() {
